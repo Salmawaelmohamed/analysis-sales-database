@@ -1,0 +1,93 @@
+-- إنشاء جدول المبيعات
+CREATE TABLE sales (
+  ID INT NOT NULL PRIMARY KEY,
+  transaction_date DATE,
+  product NVARCHAR(100),
+  price INT,
+  payment_type NVARCHAR(50),
+  name NVARCHAR(100),
+  city NVARCHAR(100),
+  state NVARCHAR(100),
+  country NVARCHAR(100),
+  account_created DATE,
+  last_login DATE,
+  latitude FLOAT,
+  longitude FLOAT
+);
+
+-- إدخال بيانات تجريبية
+INSERT INTO sales VALUES
+(1, '2023-05-01', 'Sofa', 1200, 'Credit Card', 'Ahmed Ali', 'Cairo', 'Cairo', 'Egypt', '2023-01-10', '2023-05-01', 30.033, 31.233),
+(2, '2023-05-03', 'Table', 800, 'PayPal', 'Sarah Hamed', 'Giza', 'Giza', 'Egypt', '2023-02-15', '2023-05-03', 29.987, 31.211),
+(3, '2023-06-10', 'Chair', 400, 'Credit Card', 'John Smith', 'New York', 'NY', 'United States', '2023-03-01', '2023-06-10', 40.7128, -74.0060),
+(4, '2023-06-12', 'Desk', 700, 'Visa', 'Jane Doe', 'Los Angeles', 'CA', 'United States', '2023-03-05', '2023-06-12', 34.0522, -118.2437),
+(5, '2023-07-01', 'Wardrobe', 1500, 'MasterCard', 'Ali Hassan', 'Alexandria', 'Alexandria', 'Egypt', '2023-04-01', '2023-07-01', 31.2001, 29.9187);
+
+-- 1. عرض كل المنتجات مع ترتيبها حسب السعر من الأعلى للأقل
+SELECT * FROM sales
+ORDER BY price DESC;
+
+-- 2. أعلى ٣ منتجات تم بيعها (حسب السعر)
+SELECT TOP 3 * FROM sales
+ORDER BY price DESC;
+
+-- 3. المنتجات المباعة باستخدام "Credit Card" أو "PayPal"
+SELECT * FROM sales
+WHERE payment_type = 'Credit Card' OR payment_type = 'PayPal';
+
+-- 4. المنتجات المباعة في مصر باستخدام "Visa"
+SELECT * FROM sales
+WHERE country = 'Egypt' AND payment_type = 'Visa';
+
+-- 5. تحليل عدد المنتجات المباعة حسب الدولة
+SELECT country, COUNT(*) AS total_sales
+FROM sales
+GROUP BY country
+ORDER BY total_sales DESC;
+
+-- 6. تحليل عدد المنتجات المباعة حسب طريقة الدفع
+SELECT payment_type, COUNT(*) AS total_payments
+FROM sales
+GROUP BY payment_type
+ORDER BY total_payments DESC;
+
+-- 7. المنتجات التي سعرها بين 500 و 1500 في الولايات المتحدة
+SELECT * FROM sales
+WHERE country = 'United States' AND price BETWEEN 500 AND 1500;
+
+-- 8. المنتجات المباعة في تواريخ معينة
+SELECT * FROM sales
+WHERE transaction_date BETWEEN '2023-06-01' AND '2023-06-30'
+ORDER BY transaction_date DESC;
+
+-- 9. ترتيب المنتجات حسب التاريخ أولاً ثم السعر
+SELECT * FROM sales
+ORDER BY transaction_date DESC, price DESC;
+
+-- 10. أكثر مدينة تم فيها بيع المنتجات
+SELECT city, COUNT(*) AS total_sales
+FROM sales
+GROUP BY city
+ORDER BY total_sales DESC;
+
+-- 11. المستخدمين الذين أنشأوا حساباتهم قبل مايو 2023
+SELECT * FROM sales
+WHERE account_created < '2023-05-01';
+
+-- 12. المنتجات المباعة باسم شخص يحتوي على 'Ali'
+SELECT * FROM sales
+WHERE name LIKE '%Ali%';
+
+-- 13. تحليل المبيعات حسب الولاية
+SELECT state, COUNT(*) AS total_sales
+FROM sales
+GROUP BY state
+ORDER BY total_sales DESC;
+
+-- 14. المنتجات التي تم تسجيل الدخول فيها في نفس يوم الشراء
+SELECT * FROM sales
+WHERE transaction_date = last_login;
+
+-- 15. عرض تفاصيل المنتجات مرتبة حسب الدولة وطريقة الدفع
+SELECT * FROM sales
+ORDER BY country ASC, payment_type ASC;
