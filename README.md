@@ -1,12 +1,23 @@
-# analysis-sales-d# 🪑 Online Furniture Store - SQL Sales Database
+# 🪑 Online Furniture Store - SQL Sales Database
 
-This project is a simulation of an online furniture store's sales system using SQL. It includes a complete dataset and useful queries for practicing and analyzing business data.
+This project simulates a furniture e-commerce database using SQL. It includes realistic sales data and a variety of analytical queries to explore inventory, pricing, and customer behaviors.
 
 ## 📦 Features
+- Full SQL schema with sample data
+- Real-world business logic
+- Queries for:
+  - Filtering with `AND` / `OR`
+  - Sorting by price and date
+  - Analyzing best-selling products
 
-- Full SQL table with realistic sales data
-- Various SQL queries for:
-  - Filtering using `AND` / `OR`
-  - Sorting by price or transaction date
-  - Identifying top-selling products
-  - Analyzing sales by country or payment type
+## 🛠 Tools Used
+- SQLite / SQL Editor (Khan Academy)
+- GitHub for version control
+
+## 📊 How to Use
+1. Copy and paste the SQL schema into your SQL environment.
+2. Run the queries section by section to explore the data.
+
+## 👩‍💻 Author
+**Salma Wael**  
+GitHub: [@Salmawaelmohamed](https://github.com/Salmawaelmohamed)
